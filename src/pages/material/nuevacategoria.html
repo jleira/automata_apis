@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar class="cyan" color="automata-primary">
+        <ion-title *ngIf="caso==3">
+            Editar Categoria
+      </ion-title>
+      <ion-title *ngIf="caso==1">
+        Nueva Categoria
+    </ion-title>
+    
+    
+    <ion-title *ngIf="caso==2">
+      Categorias
+    </ion-title>
+    <ion-title *ngIf="caso==1">
+      Nueva Categoria
+    </ion-title>
+    <ion-title *ngIf="caso==4">
+        Categoria
+      </ion-title>
+
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        Cerrar
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen *ngIf="caso==1 || caso==3">
+  <form #form="ngForm" (ngSubmit)="guardarcategoria(form.value)" novalidate>
+    <ion-item>
+      <ion-label floating color="automata-gray">Nombre</ion-label>
+      <ion-input type="text" name='nombre' [(ngModel)]="Nombre" required #nombre="ngModel" [class.invalid]="nombre.errors && nombre.dirty" ></ion-input>
+    </ion-item>
+    <ion-item class="error-message" no-lines *ngIf="nombre.errors?.required && nombre.dirty">
+      <p style="color:red">Nombre Requerido</p>
+    </ion-item>
+    <ion-item>
+      <ion-label floating color="automata-gray">referencia</ion-label>
+      <ion-input type="text" name='referencia' [(ngModel)]="Referencia" #referencia="ngModel" value="{{referncia}}"></ion-input>
+    </ion-item>
+
+    <ion-item text-wrap>
+      <ion-label floating color="automata-gray"> Descripcion</ion-label>
+      <ion-textarea text-wrap type="text" rows="4" name='descripcion' [(ngModel)]="Descripcion" ngModel #descripcion="ngModel"></ion-textarea>
+    </ion-item>
+
+
+    <div padding *ngIf="caso==1">
+      <button ion-button color="automata-secondary"  block type="submit" [disabled]="!form.valid">CREAR</button>
+    </div>
+    <div padding *ngIf="caso==3">
+        <button ion-button color="automata-secondary"  block type="submit" [disabled]="!form.valid">Editar</button>
+      </div>
+  
+
+  </form>
+</ion-content>
+<ion-content fullscreen *ngIf="caso==2">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Deslize para recargar"
+          refreshingSpinner="circles"
+          refreshingText="Cargando...">
+        </ion-refresher-content>
+      </ion-refresher>
+
+  <ion-list-header color="pesto-light">
+    <h2>Categorias</h2>
+  </ion-list-header>
+
+  <ion-list>
+    <div *ngFor="let item of items">
+        <ion-card>
+          <ion-item-sliding>
+            <ion-item>
+                <h2> {{item.nombre}}</h2>
+                <h5> {{item.referencia}}</h5>
+                <p> {{item.descripcion}} </p>
+            </ion-item>
+            <ion-item-options side="right">
+              <button ion-button color="automata-primary-light" (click)="editarcategoria(item)" >
+                <ion-icon name="clipboard"></ion-icon>
+                Editar
+              </button>
+              <button ion-button (click)="abrirdetalles(item)" color="automata-secondary-light">
+                <ion-icon name="eye"></ion-icon>
+                Detalles
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-card>
+    </div>
+  </ion-list>
+</ion-content>
+<ion-content fullscreen *ngIf="caso==4">
+    <ion-item text-wrap no-lines>
+        Nombre : {{Nombre}}
+      </ion-item>
+      <ion-item text-wrap no-lines>
+          Referencia : {{Referencia}}
+        </ion-item>
+
+      <ion-item text-wrap no-lines>
+          Descripcion : {{Descripcion}}
+        </ion-item>
+          
+</ion-content>

@@ -1,0 +1,30 @@
+<!--
+  Generated template for the MaterialPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <ion-navbar color="automata-primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Materiales</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-fab right bottom *ngIf="creacionhabilitada">
+    <button ion-fab color="automata-secondary" mini>Categorias</button>
+    <ion-fab-list side="left">
+      <button *ngIf="habilitarcategoria" ion-fab mini color="automata-primary-light" (click)="agregarategoria()">
+        <ion-icon name="add-circle"></ion-icon> Agregar</button>
+      <button ion-fab mini color="automata-primary-light" (click)="categorias()">
+        <ion-icon name="eye" ></ion-icon> Buscar</button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>

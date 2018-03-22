@@ -1,0 +1,40 @@
+<ion-content style="background-color:#D50000" >
+  <div style="width:100%" style="text-align:center">
+     <img width="40%"  src="assets/imgs/logo.png"/>
+  </div>
+    
+  <ion-title  color="pesto-dark">  <h2 color="pesto-dark" style="color:;text-align:center"  >AUTOMATA</h2>
+    </ion-title>
+  <form #form="ngForm" (ngSubmit)="login(form.value)" novalidate>
+    <ion-list>
+      <ion-item style="background-color:transparent"  no-lines >
+        <ion-label color="pesto-scondary-text" floating>Correo</ion-label>
+        <ion-input type="email" name='email' ngModel required #email="ngModel"
+                   [class.invalid]="email.errors && email.dirty"></ion-input>
+      </ion-item>
+      <ion-item style="background-color:transparent" class="error-message" no-lines *ngIf="email.errors?.required && email.dirty">
+        <p style="color:gray">Email Requerido </p>
+      </ion-item>
+
+      <ion-item style="background-color:transparent"  no-lines>
+        <ion-label color="pesto-scondary-text" floating>Contraseña</ion-label>
+        <ion-input type="password" name='password' ngModel required #password="ngModel"
+                   [class.invalid]="password.errors && password.dirty"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" no-lines *ngIf="password.errors?.required && password.dirty" style="background-color:transparent"  no-lines >
+       <p style="color:gray" >Contraseña Requerida</p>
+      </ion-item>
+      <br>
+
+      <div *ngIf="msj" padding color="danger" style="text-align:center;width:100%">
+        <h2 style="color:gray">{{msj}}</h2> 
+       </div>
+ 
+
+      <div padding *ngIf="!msj">
+        <button ion-button  color="pesto-dark" block type="submit" [disabled]="!form.valid">Entrar</button>
+      </div>
+     
+    </ion-list>
+  </form>
+</ion-content>
